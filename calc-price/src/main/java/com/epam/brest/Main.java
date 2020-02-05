@@ -18,7 +18,7 @@ public class Main {
             } else if (i == 1) {
                 System.out.println("Please, enter price per km or Q for exit: ");
             } else if (i == 2) {
-                System.out.println("Please, enter weight or Q for exit: ");
+                System.out.println("Please2, enter weight or Q for exit: ");
             } else {
                 System.out.println("Please, enter price per kg or Q for exit: ");
             }

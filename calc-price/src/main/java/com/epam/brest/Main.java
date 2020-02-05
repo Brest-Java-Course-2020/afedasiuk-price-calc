@@ -14,13 +14,13 @@ public class Main {
         do {
 
             if (i == 0) {
-                System.out.println("Please, enter distance or Q for exit: ");
+                System.out.println("enter distance or Q for exit: ");
             } else if (i == 1) {
-                System.out.println("Please, enter price per km or Q for exit: ");
+                System.out.println("enter price per km or Q for exit: ");
             } else if (i == 2) {
-                System.out.println("Please, enter weight or Q for exit: ");
+                System.out.println("enter weight or Q for exit: ");
             } else {
-                System.out.println("Please, enter price per kg or Q for exit: ");
+                System.out.println("enter price per kg or Q for exit: ");
             }
 
             inputValue = scanner.next();

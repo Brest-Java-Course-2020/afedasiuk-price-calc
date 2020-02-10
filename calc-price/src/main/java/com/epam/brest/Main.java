@@ -34,22 +34,22 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         BigDecimal weightValue, distanceValue;
-        EnteredValue value;
 
         do {
-            value = main.getValueFromConsole("Enter weight of cargo in kg or 'q' for quit", scanner);
-            if (!isExitValue(value)) {
-                weightValue = ((CorrectValue) value).getValue();
-                value = main.getValueFromConsole("Enter distance in km or 'q' for quit", scanner);
-                if (!isExitValue(value)) {
-                    distanceValue = ((CorrectValue) value).getValue();
-                    BigDecimal result = calculator.calc(weightValue, distanceValue,
-                            priceSelector.selectPriceValue(main.kgs, weightValue),
-                            priceSelector.selectPriceValue(main.kms, distanceValue));
-                    System.out.format("RESULT: %.2f$%n", result);
-                }
-            }
-        } while (!isExitValue(value));
+            EnteredValue value = main.getValueFromConsole("Enter weight of cargo in kg or 'q' for quit", scanner);
+            if (isExitValue(value)) break;
+            weightValue = ((CorrectValue) value).getValue();
+
+            value = main.getValueFromConsole("Enter distance in km or 'q' for quit", scanner);
+            if (isExitValue(value)) break;
+            distanceValue = ((CorrectValue) value).getValue();
+
+            BigDecimal priceWeight = priceSelector.selectPriceValue(main.kgs, weightValue);
+            BigDecimal priceDistance = priceSelector.selectPriceValue(main.kms, distanceValue);
+            BigDecimal calcResult = calculator.calc(weightValue, distanceValue, priceWeight, priceDistance);
+            System.out.format("RESULT: %.2f$%n", calcResult);
+        } while (true);
+
         System.out.println("Finish!");
     }
 

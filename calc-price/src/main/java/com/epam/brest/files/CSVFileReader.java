@@ -1,25 +1,27 @@
 package com.epam.brest.files;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.TreeMap;
 
 public class CSVFileReader implements FileReader {
 
     @Override
     public Map<Integer, BigDecimal> readData(String filePath) throws IOException {
-        String paths = Objects.requireNonNull(CSVFileReader.class.getClassLoader().getResource(filePath)).getPath();
-
-        Map<Integer, BigDecimal> resultMap;
-        try (Stream<String> lines = Files.lines(Paths.get(paths))) {
-            resultMap =
-                    lines.map(line -> line.split(","))
-                            .collect(Collectors.toMap(line -> Integer.parseInt(line[0]), line -> new BigDecimal(line[1])));
+        Map<Integer, BigDecimal> resultMap = new TreeMap<>();
+        InputStream inputStream = getClass().getResourceAsStream("/" + filePath);
+        try (InputStreamReader isr = new InputStreamReader(inputStream)) {
+            BufferedReader br = new BufferedReader(isr);
+            String line;
+            String[] values;
+            while ((line = br.readLine()) != null) {
+                values = line.split(",");
+                resultMap.put(Integer.parseInt(values[0]), new BigDecimal(values[1]));
+            }
         }
         return resultMap;
     }

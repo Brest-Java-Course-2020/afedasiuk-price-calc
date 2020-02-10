@@ -9,6 +9,8 @@ import com.epam.brest.menu.EnteredValue;
 import com.epam.brest.menu.ExitValue;
 import com.epam.brest.menu.IncorrectValue;
 import com.epam.brest.selector.PriceSelector;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,7 +29,12 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Calculator calculator = new CalculatorImpl();
+        ApplicationContext applicationContext =
+                new ClassPathXmlApplicationContext("application-config.xml");
+
+        Calculator calculator =
+                (Calculator) applicationContext.getBean("calculator");
+
         PriceSelector priceSelector = new PriceSelector();
         Main main = new Main();
         main.init();

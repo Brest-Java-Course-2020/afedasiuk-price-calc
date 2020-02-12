@@ -4,7 +4,11 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="calculator" class="com.epam.brest.calc.CalculatorImpl" init-method="init">
-    </bean>
+    <bean id="calculator" class="com.epam.brest.calc.CalculatorImpl"/>
+    <bean id="fileReader" class="com.epam.brest.files.CSVFileReader"/>
+    <bean id="selector" class="com.epam.brest.selector.PriceSelector"/>
+    <bean id="main" class="com.epam.brest.Main"/>
+
+    <bean class="com.epam.brest.MainPostProcessor"/>
 
 </beans>

@@ -32,12 +32,11 @@ public class Main {
         ApplicationContext applicationContext =
                 new ClassPathXmlApplicationContext("application-config.xml");
 
-        Calculator calculator =
-                (Calculator) applicationContext.getBean("calculator");
-
-        PriceSelector priceSelector = new PriceSelector();
-        Main main = new Main();
-        main.init();
+        Calculator calculator = (Calculator) applicationContext.getBean("calculator");
+        FileReader fileReader = applicationContext.getBean(FileReader.class);
+        PriceSelector priceSelector = applicationContext.getBean(PriceSelector.class);
+        Main main = applicationContext.getBean(Main.class);
+        main.init(fileReader);
 
         Scanner scanner = new Scanner(System.in);
         BigDecimal weightValue, distanceValue;
@@ -60,9 +59,9 @@ public class Main {
         System.out.println("Finish!");
     }
 
-    private void init() throws IOException {
+    public void init(FileReader fileReader) throws IOException {
 
-        FileReader fileReader = new CSVFileReader();
+        fileReader = new CSVFileReader();
         kgs = fileReader.readData("weight_prices.csv");
         if (kgs == null || kgs.isEmpty()) {
             throw new FileNotFoundException("File with prices per kg not found.");
